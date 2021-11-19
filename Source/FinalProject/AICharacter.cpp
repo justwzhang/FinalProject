@@ -15,7 +15,7 @@ AAICharacter::AAICharacter()
 	CollisionCapsule->SetupAttachment(RootComponent);
 
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
-	PawnSensingComp->SetPeripheralVisionAngle(90.0f);
+	PawnSensingComp->SetPeripheralVisionAngle(360.0f);
 }
 
 // Called when the game starts or when spawned
