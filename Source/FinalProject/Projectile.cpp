@@ -2,6 +2,7 @@
 
 
 #include "Projectile.h"
+#include "AICharacter.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -20,6 +21,12 @@ AProjectile::AProjectile()
 		CollisionComponent->InitSphereRadius(15.0f);
 		// Set the root component to be the collision component.
 		RootComponent = CollisionComponent;
+	}
+	if (!TriggerCapsule) {
+		TriggerCapsule = CreateDefaultSubobject<USphereComponent>(TEXT("Trigger Capsule"));
+		CollisionComponent->InitSphereRadius(17.0f);
+		TriggerCapsule->SetCollisionProfileName(TEXT("Trigger"));
+		TriggerCapsule->OnComponentBeginOverlap.AddDynamic(this, &AProjectile::OnOverlapBegin);
 	}
 	if (!ProjectileMovementComponent)
 	{
@@ -59,6 +66,21 @@ AProjectile::AProjectile()
 	// Event called when component hits something.
 	CollisionComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 }
+
+void AProjectile::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	/*GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("OverLapMethod"));
+	if (OtherActor && (OtherActor != this) && OtherComp)
+	{
+		if (dynamic_cast<AAICharacter*>(OtherActor) != nullptr) {
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Deleated"));
+			OtherActor->Destroy();
+			Destroy();
+		}
+
+	}*/
+}
+
 // Called when the game starts or when spawned
 void AProjectile::BeginPlay()
 {
@@ -85,6 +107,7 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
 	{
 		OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
+		OtherComponent->DestroyComponent();
 	}
 
 	Destroy();

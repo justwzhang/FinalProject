@@ -23,7 +23,7 @@ void AAICharacterController::OnPossess(APawn* ThePawn)
 	Super::OnPossess(ThePawn);
 
 	AAICharacter* theCharacter = Cast<AAICharacter>(ThePawn);
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Possessing Pawn"));
+	/*GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Possessing Pawn"));*/
 	if (theCharacter) {
 		AICharacter = theCharacter;
 		if (theCharacter->BehaviorTree->BlackboardAsset)

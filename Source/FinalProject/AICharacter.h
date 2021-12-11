@@ -13,6 +13,7 @@ class FINALPROJECT_API AAICharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+
 public:
 	// Sets default values for this character's properties
 	AAICharacter();
@@ -34,6 +35,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = AI)
 		class UBehaviorTree* BehaviorTree;
+
+	UPROPERTY(VisibleAnywhere, Category = "Trigger Capsule")
+		class UCapsuleComponent* TriggerCapsule;
 
 	UPROPERTY(EditAnywhere, Category = AI)
 		class UPawnSensingComponent* PawnSensingComp;
