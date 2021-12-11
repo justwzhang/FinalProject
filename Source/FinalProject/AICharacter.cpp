@@ -15,7 +15,7 @@ AAICharacter::AAICharacter()
 	CollisionCapsule->SetupAttachment(RootComponent);
 
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
-	PawnSensingComp->SetPeripheralVisionAngle(360.0f);
+	PawnSensingComp->SetPeripheralVisionAngle(300.0f);
 }
 
 // Called when the game starts or when spawned
@@ -44,7 +44,7 @@ void AAICharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 void AAICharacter::OnPlayerCaught(APawn* pawn) {
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 	if (AIController) {
-		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("SeePlayer"));
+		/*GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("SeePlayer"));*/
 		AIController->SetPlayerCaught(pawn);
 	}
 }
