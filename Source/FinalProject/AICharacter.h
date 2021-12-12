@@ -39,9 +39,4 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Trigger Capsule")
 		class UCapsuleComponent* TriggerCapsule;
 
-	UPROPERTY(EditAnywhere, Category = AI)
-		class UPawnSensingComponent* PawnSensingComp;
-
-	UFUNCTION()
-		void OnPlayerCaught(APawn* pawn);
 };
